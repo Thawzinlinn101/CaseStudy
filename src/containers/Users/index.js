@@ -19,9 +19,16 @@ function xxx() {
 function Users({ route, navigation }) {
     const { userName } = route.params;
 
-    let usersData = Object.entries(LeaderBoard).map(([id, value]) => ({
-        id, ...value, rank: value['1'],
-    })).sort((a, b) => b.bananas - a.bananas);
+    let usersData = Object.entries(LeaderBoard).map(([id, value]) => {
+        console.log(id, value);
+        return {
+            id, ...value
+        }
+    }).sort((a, b) => b.bananas - a.bananas)
+        .map((userData, index) => {
+            userData.rank = index + 1;
+            return { ...userData };
+        })
 
     let userIndex = usersData.findIndex(data => data.name == userName);
 
@@ -35,7 +42,7 @@ function Users({ route, navigation }) {
         [data.name, data.rank, data.bananas, userName === data.name ? 'yes' : 'no']
     )
 
-    console.warn("test ----", topTenUsers[4] === 'yes');
+    // console.warn("test ----", topTenUsers[4] === 'yes');
 
     return (
         <View style={styles.container}>
