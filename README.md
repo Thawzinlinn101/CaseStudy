@@ -19,3 +19,14 @@
 4. Open the app and **input userId** to start testing
 5. Scroll and view the users table list
 
+#### Home Screen
+
+![Home Screenshot](./assets/images/Home.png)
+
+#### UserId Not Found Screen
+
+![Home Screenshot](./assets/images/UserIdNotFound.png)
+
+#### Users List Screen Recording
+
+<video src="./assets/videos/UsersList.mp4" controls></video>
