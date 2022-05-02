@@ -1,65 +1,82 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
-import { Table, TableWrapper, Row, Rows } from 'react-native-table-component';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, ScrollView, Text } from 'react-native';
+import { Table, TableWrapper, Row } from 'react-native-table-component';
 import LeaderBoard from '../../assets/JsonData/leaderboard.json';
 
 const tableHead = ['Name', 'Rank', 'Number of bananas', 'isCurrentUser?'];
-const widthArr = [200, 100, 150, 100];
-const tableData = [
-    ['1', '2', '3', '4'],
-    ['21', '22', '23', '24'],
-    ['31', '32', '33', '34'],
-];
+const widthArr = [200, 100, 200, 150];
 
-function xxx() {
 
-    return sorted;
-}
+const styles = StyleSheet.create({
+    container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
+    header: { height: 50, backgroundColor: '#0A77BC' },
+    headerText: { fontWeight: '700', color: 'black', fontSize: 16, textAlign: 'center' },
+    text: { textAlign: 'center', fontWeight: '300', color: 'black' },
+    dataWrapper: { marginTop: -1 },
+    row: { height: 40 }
+});
 
 function Users({ route, navigation }) {
-    const { userName } = route.params;
+    const { currentUserId } = route.params;
 
-    let usersData = Object.entries(LeaderBoard).map(([id, value]) => {
-        console.log(id, value);
-        return {
-            id, ...value
+    const [topTenUsers, setTopTenUsers] = useState([]);
+
+    const [sortedLeaderBoard, setSortedLeaderBoard] = useState(null);
+
+    const [topTenUsersObject, setTopTenUsersObject] = useState({});
+
+    useEffect(() => {
+        if (sortedLeaderBoard == null) {
+            let sortedLeaderBoardEntries = Object.entries(LeaderBoard)
+                .sort((userA, userB) => userB[1].bananas - userA[1].bananas)
+                .map((user, index) => {
+                    user[1].rank = index + 1;
+                    return user;
+                });
+
+            let topTenUsersEntries = sortedLeaderBoardEntries.slice(0, 10);
+
+
+            setTopTenUsersObject(Object.fromEntries(topTenUsersEntries));
+            setSortedLeaderBoard(Object.fromEntries(sortedLeaderBoardEntries))
+            setTopTenUsers(topTenUsersEntries.map(userEntries => userEntries[1]));
         }
-    }).sort((a, b) => b.bananas - a.bananas)
-        .map((userData, index) => {
-            userData.rank = index + 1;
-            return { ...userData };
-        })
+    })
 
-    let userIndex = usersData.findIndex(data => data.name == userName);
+    const makeDataToShow = () => {
+        if (sortedLeaderBoard !== null && topTenUsersObject[`${currentUserId}`] === undefined) {
+            let dataToShow = topTenUsers;
+            dataToShow.pop();
+            dataToShow.push(sortedLeaderBoard[`${currentUserId}`]);
+            return dataToShow;
+        }
 
-    let topTenUsers = usersData.slice(0, 10);
-    if (userIndex > 9) {
-        topTenUsers.pop();
-        topTenUsers.push(usersData[userIndex])
+        return topTenUsers;
     }
 
-    topTenUsers = topTenUsers.map((data) =>
-        [data.name, data.rank, data.bananas, userName === data.name ? 'yes' : 'no']
-    )
-
-    // console.warn("test ----", topTenUsers[4] === 'yes');
+    const filterDataToShow = (dataToShow) => {
+        if (dataToShow.length == 0) return [];
+        return dataToShow.map((userData) => [userData.name, userData.rank, userData.bananas, userData.uid === currentUserId ? 'yes' : 'no', userData.uid]);
+    }
 
     return (
         <View style={styles.container}>
             <ScrollView horizontal={true}>
                 <View>
                     <Table borderStyle={{ borderWidth: 1, borderColor: '#C1C0B9' }}>
-                        <Row data={tableHead} widthArr={widthArr} style={styles.header} textStyle={styles.text} />
+                        <Row data={tableHead} widthArr={widthArr} style={styles.header} textStyle={styles.headerText} />
                     </Table>
                     <ScrollView style={styles.dataWrapper}>
                         <Table borderStyle={{ borderWidth: 1, borderColor: '#C1C0B9' }}>
-                            <Rows
-                                data={topTenUsers}
-                                widthArr={widthArr}
-                                // style={[styles.row, topTenUsers[4] === 'yes' && { backgroundColor: 'red' }]}
-                                style={styles.row}
-                                textStyle={styles.text}
-                            />
+                            {filterDataToShow(makeDataToShow()).map((user, index) => (
+                                <Row
+                                    data={user}
+                                    key={index}
+                                    widthArr={widthArr}
+                                    style={styles.row}
+                                    textStyle={[styles.text, user[3] === 'yes' && { color: 'red' }]}
+                                />
+                            ))}
                         </Table>
                     </ScrollView>
                 </View>
@@ -68,12 +85,5 @@ function Users({ route, navigation }) {
     );
 }
 
-const styles = StyleSheet.create({
-    container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
-    header: { height: 50, backgroundColor: '#0A77BC', fontWeight: '900', color: 'black' },
-    text: { textAlign: 'center', fontWeight: '300', color: 'black' },
-    dataWrapper: { marginTop: -1 },
-    row: { height: 40 }
-});
 
 export default Users;
