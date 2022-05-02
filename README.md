@@ -29,4 +29,4 @@
 
 #### Users List Screen Recording
 
-<video src="./assets/videos/UsersList.mp4" controls></video>
+<video type="video/mp4" src="./assets/videos/UsersList.mp4" width="720" height="405" preload="auto" controls></video>
