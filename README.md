@@ -27,6 +27,4 @@
 
 <img src="https://firebasestorage.googleapis.com/v0/b/testing-40cef.appspot.com/o/UserIdNotFound.png?alt=media&token=0cc6198b-0a06-46cf-9856-47d745f12dc8" width="400" height="auto"/>
 
-#### Users List Screen Recording
-
-<video type="video/mp4" src="https://firebasestorage.googleapis.com/v0/b/testing-40cef.appspot.com/o/UsersList.mp4?alt=media&token=fffd0760-5efa-4294-8646-f5fa5caea7e0" width="400" height="auto" preload="auto" controls></video>
+- [View Users List Screen Recording](https://firebasestorage.googleapis.com/v0/b/testing-40cef.appspot.com/o/UsersList.mp4?alt=media&token=fffd0760-5efa-4294-8646-f5fa5caea7e0)
