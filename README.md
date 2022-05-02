@@ -21,12 +21,12 @@
 
 #### Home Screen
 
-![Home Screenshot](./assets/images/Home.png)
+<img src="https://firebasestorage.googleapis.com/v0/b/testing-40cef.appspot.com/o/Home.png?alt=media&token=931fecf6-f01b-4ea9-97e5-f9fe00285fe6" width="400" height="auto"/>
 
 #### UserId Not Found Screen
 
-![Home Screenshot](./assets/images/UserIdNotFound.png)
+<img src="https://firebasestorage.googleapis.com/v0/b/testing-40cef.appspot.com/o/UserIdNotFound.png?alt=media&token=0cc6198b-0a06-46cf-9856-47d745f12dc8" width="400" height="auto"/>
 
 #### Users List Screen Recording
 
-<video type="video/mp4" src="./assets/videos/UsersList.mp4" width="720" height="405" preload="auto" controls></video>
+<video type="video/mp4" src="https://firebasestorage.googleapis.com/v0/b/testing-40cef.appspot.com/o/UsersList.mp4?alt=media&token=fffd0760-5efa-4294-8646-f5fa5caea7e0" width="400" height="auto" preload="auto" controls></video>
