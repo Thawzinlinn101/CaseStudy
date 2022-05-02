@@ -3,6 +3,7 @@
 # **Guideline**
 
 ### **For Android:**
+Creating a list
 _Step 1:_ npm install
 _Step 2:_ Create local.properties file under android folder 
 _Step 3:_ Add sdk path in local.properties file (for run android emulator)
@@ -13,6 +14,7 @@ _Step 6:_ Please scroll and view the users table list
 ---------------------------------------------------------------------------------
 
 ### **For IOS:**
+Creating a list
 _Step 1:_ npm install
 _Step 2:_ In terminal go to ios folder and pod install
 _Step 3:_ Open xcode (ios/CaseStudy.xcworkspace) and run
